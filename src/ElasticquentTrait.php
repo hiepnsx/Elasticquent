@@ -50,6 +50,8 @@ trait ElasticquentTrait
      */
     protected $documentVersion = null;
 
+    protected $indexName = null;
+
     /**
      * Mapping Properties
      *
@@ -81,12 +83,12 @@ trait ElasticquentTrait
         // config file and if there is a default index.
         $index_name = $this->getElasticConfig('default_index');
 
-        if (!empty($index_name)) {
+        if (!empty($this->indexName)) {
             return $index_name;
         }
 
         // Otherwise we will just go with 'default'
-        return 'default';
+        return $this->indexName;
     }
 
     /**
@@ -144,6 +146,10 @@ trait ElasticquentTrait
     public function setMappingProperties(array $mapping = null)
     {
         $this->mappingProperties = $mapping;
+    }
+
+    public function setIndexName($name = null) {
+        $this->indexName = $name;
     }
 
     /**
